@@ -21,7 +21,7 @@ func main() {
 	}
 
 	homeHandle := new(handlers.Home)
-	
+
 	// This handler serve all static files on the app
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./public/assets"))))
 	http.Handle("/", homeHandle)
