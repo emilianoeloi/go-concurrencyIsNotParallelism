@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/emilianoeloi/go-concurrencyIsNotParallelism/handlers"
-	"github.com/emilianoeloi/go-concurrencyIsNotParallelism/sqlite"
+	"./handlers"
+	"./sqlite"
 )
 
 const port = ":8080"

@@ -3,7 +3,7 @@ package sqlite
 import (
 	"fmt"
 
-	"github.com/viniciusfeitosa/MyFirstAppWithGo/models"
+	"../models"
 )
 
 var (

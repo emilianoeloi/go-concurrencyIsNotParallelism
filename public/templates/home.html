@@ -1,0 +1,12 @@
+{{ define "home" }}
+{{ template "head" }}
+<fieldset>
+  <legend>Form</legend>
+  <form action="/create_user" method="POST">
+    <label for="url">Url</label>
+    <input type="text" name="url" id="url" placeholder="http://av.com">
+    <button type="submit" class="btn btn-lg btn-default">Submit</button>
+  </form>
+</fieldset>
+{{ template "footer" }}
+{{ end }}
