@@ -12,16 +12,19 @@ const (
 	// UserIDCol is the column name of the model's ID
 	UserIDCol = "id_user"
 	// UserNameCol is the column name of the model's name
-	UserNameCol = "name"
+	UserUrl1Col = "url1"
 	// UserEmailCol is the column name of the model's email
-	UserEmailCol = "email"
+	UserUrl2Col = "url2"
+	// UserEmailCol is the column name of the model's email
+	UserUrl3Col = "url3"
 )
 
 // User is the type to represent an user entity
 type User struct {
 	ID    int64  `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Url1  string `json:"url1"`
+	Url2  string `json:"url2"`
+	Url3  string `json:"url3"`
 }
 
 // NewUser return an instance of user
@@ -32,9 +35,10 @@ func NewUser() *User {
 // Insert is the function to insert an user
 func (u *User) Insert(db *sql.DB) (sql.Result, error) {
 	return db.Exec(
-		fmt.Sprintf("INSERT INTO %s (%s, %s) VALUES(?, ?)", UserTableName, UserNameCol, UserEmailCol),
-		u.Name,
-		u.Email,
+		fmt.Sprintf("INSERT INTO %s (%s, %s, %s) VALUES(?, ?, ?)", UserTableName, UserUrl1Col, UserUrl2Col, UserUrl3Col),
+		u.Url1,
+		u.Url2,
+		u.Url3,
 	)
 }
 
@@ -42,12 +46,13 @@ func (u *User) Insert(db *sql.DB) (sql.Result, error) {
 func (u *User) SelectAll(db *sql.DB) ([]User, error) {
 	rows, err := db.Query(
 		fmt.Sprintf(
-			"SELECT %s, %s, %s FROM %s ORDER BY %s ASC",
+			"SELECT %s, %s, %s, %s FROM %s ORDER BY %s ASC",
 			UserIDCol,
-			UserNameCol,
-			UserEmailCol,
+			UserUrl1Col,
+			UserUrl2Col,
+			UserUrl3Col,
 			UserTableName,
-			UserNameCol,
+			UserUrl1Col,
 		),
 	)
 	if err != nil {
@@ -57,68 +62,13 @@ func (u *User) SelectAll(db *sql.DB) ([]User, error) {
 
 	var users []User
 	for rows.Next() {
-		var retName, retEmail string
+		var retUrl1, retUrl2, retUrl3 string
 		var retID int64
-		if err := rows.Scan(&retID, &retName, &retEmail); err != nil {
+		if err := rows.Scan(&retID, &retUrl1, &retUrl2, &retUrl3); err != nil {
 			return nil, err
 		}
-		log.Println(retName)
-		users = append(users, User{ID: retID, Name: retName, Email: retEmail})
+		log.Println(retUrl1)
+		users = append(users, User{ID: retID, Url1: retUrl1, Url2: retUrl2, Url3: retUrl3})
 	}
 	return users, nil
-}
-
-// SelectOne selects a user with the given ID
-func (u *User) SelectOne(db *sql.DB, id int64) error {
-	row := db.QueryRow(
-		fmt.Sprintf(
-			"SELECT %s, %s, %s FROM %s WHERE %s=?",
-			UserIDCol,
-			UserNameCol,
-			UserEmailCol,
-			UserTableName,
-			UserIDCol,
-		),
-		id,
-	)
-	var retName, retEmail string
-	var retID int64
-	if err := row.Scan(&retID, &retName, &retEmail); err != nil {
-		return err
-	}
-	u.ID = retID
-	u.Name = retName
-	u.Email = retEmail
-	return nil
-}
-
-// Update updates the user with the given ID
-func (u *User) Update(db *sql.DB, id int64) error {
-	_, err := db.Exec(
-		fmt.Sprintf(
-			"UPDATE %s SET %s=?,%s=? WHERE %s=?",
-			UserTableName,
-			UserNameCol,
-			UserEmailCol,
-			UserIDCol,
-		),
-		u.Name,
-		u.Email,
-		id,
-	)
-	return err
-}
-
-// Delete deletes the user with the given ID
-func (u *User) Delete(db *sql.DB, id int64) error {
-	log.Println(u.ID)
-	_, err := db.Exec(
-		fmt.Sprintf(
-			"DELETE FROM %s WHERE %s=?",
-			UserTableName,
-			UserIDCol,
-		),
-		id,
-	)
-	return err
 }

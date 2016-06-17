@@ -21,10 +21,12 @@ func main() {
 	}
 
 	homeHandle := new(handlers.Home)
+	userHandle := handlers.NewUser(db)
 
 	// This handler serve all static files on the app
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./public/assets"))))
 	http.Handle("/", homeHandle)
+	http.HandleFunc("/process_urls", http.HandlerFunc(userHandle.Create))
 
 	log.Println("Start app on port", port)
 	http.ListenAndServe(port, nil)
