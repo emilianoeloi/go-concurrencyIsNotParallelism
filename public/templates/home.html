@@ -1,18 +1,21 @@
 {{ define "home" }}
 {{ template "head" }}
 <fieldset>
-  <legend>Form</legend>
-  <form action="/process_urls" method="POST">
-    <label for="url[0]">Url 1</label>
-    <input type="text" name="url[0]" id="url[0]" value="http://av.com">
+  <legend>Podcast Form</legend>
+  <form action="/podcast_create" method="POST">
+    <label for="podcaster-name">Podcaster Name</label>
+    <input type="text" name="podcaster-name" id="podcaster-name" value="TWiT">
     <br />
-    <label for="url[1]">Url 2</label>
-    <input type="text" name="url[1]" id="url[1]" value="http://bit.ly">
+    <label for="podcaster-url">Podcaster Url</label>
+    <input type="text" name="podcaster-url" id="podcaster-url" value="https://twit.tv/">
     <br />
-    <label for="url[2]">Url 3</label>
-    <input type="text" name="url[2]" id="url[2]" value="http://migre.me">
+    <label for="podcast-name">Podcast Name</label>
+    <input type="text" name="podcast-name" id="podcast-name" value="THIS WEEK IN LAW 350">
     <br />
-    <button type="submit" class="btn btn-lg btn-default">Submit</button>
+    <label for="podcast-url">Podcast Url</label>
+    <input type="text" name="podcast-url" id="podcast-url" value="http://www.podtrac.com/pts/redirect.mp4/cdn.twit.tv/video/twil/twil0350/twil0350_h264m_864x480_500.mp4">
+    <br />
+    <button type="submit">Submit</button>
   </form>
 </fieldset>
 {{ template "footer" }}
