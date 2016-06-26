@@ -1,22 +1,24 @@
 {{ define "home" }}
 {{ template "head" }}
-<fieldset>
-  <legend>Podcast Form</legend>
-  <form action="/podcast_create" method="POST">
-    <label for="podcaster-name">Podcaster Name</label>
-    <input type="text" name="podcaster-name" id="podcaster-name" value="TWiT">
-    <br />
-    <label for="podcaster-url">Podcaster Url</label>
-    <input type="text" name="podcaster-url" id="podcaster-url" value="https://twit.tv/">
-    <br />
-    <label for="podcast-name">Podcast Name</label>
-    <input type="text" name="podcast-name" id="podcast-name" value="THIS WEEK IN LAW 350">
-    <br />
-    <label for="podcast-url">Podcast Url</label>
-    <input type="text" name="podcast-url" id="podcast-url" value="http://www.podtrac.com/pts/redirect.mp4/cdn.twit.tv/video/twil/twil0350/twil0350_h264m_864x480_500.mp4">
-    <br />
-    <button type="submit">Submit</button>
-  </form>
-</fieldset>
+<div class="row">
+  <fieldset>
+    <legend>Podcast Form</legend>
+    <form action="/podcast_create" method="POST">
+      <label for="podcaster-name">Podcaster Name</label>
+      <input type="text" name="podcaster-name" id="podcaster-name" value="TWiT">
+      <br />
+      <label for="podcaster-url">Podcaster Url</label>
+      <input type="text" name="podcaster-url" id="podcaster-url" value="https://twit.tv/">
+      <br />
+      <label for="podcast-name">Podcast Name</label>
+      <input type="text" name="podcast-name" id="podcast-name" value="THIS WEEK IN LAW 350">
+      <br />
+      <label for="podcast-url">Podcast Url</label>
+      <input type="text" name="podcast-url" id="podcast-url" value="http://www.podtrac.com/pts/redirect.mp4/cdn.twit.tv/video/twil/twil0350/twil0350_h264m_864x480_500.mp4">
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </fieldset>
+</div>
 {{ template "footer" }}
 {{ end }}
